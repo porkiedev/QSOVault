@@ -89,6 +89,7 @@ pub fn get_contacts(db: &Connection) -> Vec<Contact> {
 
         return Ok(
             Contact {
+                id: row.get(0)?,
                 callsign: row.get(1)?,
                 name: row.get(2)?,
                 frequency_hz: row.get(3)?,
@@ -122,6 +123,7 @@ pub fn get_contacts(db: &Connection) -> Vec<Contact> {
 // Structs
 
 pub struct Contact {
+    pub id: Option<u32>,
     pub callsign: Option<String>,
     pub name: Option<String>,
     pub frequency_hz: Option<u64>,
@@ -139,6 +141,7 @@ pub struct Contact {
 impl Default for Contact {
     fn default() -> Self {
         Self {
+            id: None,
             callsign: None,
             name: None,
             frequency_hz: None,

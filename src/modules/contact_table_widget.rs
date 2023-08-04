@@ -6,7 +6,10 @@ pub fn render(ui: &mut egui::Ui, app: &mut QSOVault) {
 
     // Contacts table
     {
-        egui::ScrollArea::new([true; 2]).show(ui, |new_ui| {
+        // print!("{:?}", ui.spacing_mut().item_spacing);
+        ui.separator();
+
+        egui::ScrollArea::both().show(ui, |new_ui| {
             let table = egui_extras::TableBuilder::new(new_ui)
                 .striped(true)
                 .resizable(true)
@@ -14,7 +17,8 @@ pub fn render(ui: &mut egui::Ui, app: &mut QSOVault) {
                 .column(Column::exact(10.0))
                 .column(Column::at_least(Column::auto(), 60.0))
                 .columns(Column::auto(), 10)
-                .column(Column::remainder());
+                .column(Column::remainder())
+                .min_scrolled_height(0.0);
                 //.auto_shrink([true, true]);
 
             table
@@ -69,7 +73,10 @@ pub fn render(ui: &mut egui::Ui, app: &mut QSOVault) {
                             body.row(18.0, |mut row| {
 
                                 row.col(|ui| {
-                                    ui.label(contact_index.to_string());
+                                    //ui.label(contact_index.to_string());
+                                    if let Some(val) = &contact.id {
+                                        ui.label(val.to_string());
+                                    }
                                 });
                                 row.col(|ui| {
                                     if let Some(val) = &contact.callsign {
@@ -136,6 +143,7 @@ pub fn render(ui: &mut egui::Ui, app: &mut QSOVault) {
                         }
                     }
                 });
+
         });
 
     }
