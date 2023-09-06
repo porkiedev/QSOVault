@@ -1,2 +1,6 @@
+Cargo.lock
 /target
-contacts.db3
+/.vscode
+/.idea
+/*.db
+/qso-vault.iml
